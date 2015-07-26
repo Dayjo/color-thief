@@ -94,13 +94,16 @@ ColorThief.prototype.getColor = function(sourceImage, quality) {
  *
  *
  */
-ColorThief.prototype.getPalette = function(sourceImage, colorCount, quality) {
+ColorThief.prototype.getPalette = function(sourceImage, colorCount, quality, ignoreColors) {
 
     if (typeof colorCount === 'undefined') {
         colorCount = 10;
     }
     if (typeof quality === 'undefined' || quality < 1) {
         quality = 10;
+    }
+    if ( typeof ignoreColors === 'undefined' ) {
+        ignoreColors = [];
     }
 
     // Create custom CanvasImage object
@@ -119,7 +122,9 @@ ColorThief.prototype.getPalette = function(sourceImage, colorCount, quality) {
         a = pixels[offset + 3];
         // If pixel is mostly opaque and not white
         if (a >= 125) {
-            if (!(r > 250 && g > 250 && b > 250)) {
+            var rgbaStr = r + "," + g + "," + b;
+            
+            if ( ignoreColors.indexOf(rgbaStr) == -1 && !(r > 250 && g > 250 && b > 250)) {
                 pixelArray.push([r, g, b]);
             }
         }

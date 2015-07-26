@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
-    host_config: grunt.file.readJSON('.host_config'),
+    //host_config: grunt.file.readJSON('.host_config'),
     compass: {
       dist: {
         options: {
@@ -73,5 +73,5 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('default', ['compass', 'connect', 'watch']);
-  grunt.registerTask('build', ['compass', 'jshint', 'uglify']);
+  grunt.registerTask('build', [ 'jshint', 'uglify']);
 };
